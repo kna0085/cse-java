@@ -5,8 +5,10 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.security.PublicKey;
 import java.security.SecureRandom;
+import java.security.Security;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.RSAPublicKeySpec;
 
@@ -30,6 +32,11 @@ public class Encrypter {
 	private Cipher aesCipher;
 	private Cipher rsaCipher;
 	private SecureRandom srandom;
+
+	// Vincent: By default, BouncyCastle is not used. Adding it here.
+	static {
+		Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
+	}
 
 	public Encrypter (String publicKeyString) throws EncrypterException {
 
@@ -56,11 +63,16 @@ public class Encrypter {
 		}
 
 		try {
-			aesCipher  = Cipher.getInstance("AES/CCM/NoPadding");
+			// Vincent: 'SC' stands for SpongyCastle, the repacked BouncyCastle ('BC') for Android https://rtyley.github.io/spongycastle/
+			// Back to the original one here
+			//aesCipher = Cipher.getInstance("AES/CCM/NoPadding", "SC");
+			aesCipher = Cipher.getInstance("AES/CCM/NoPadding", "BC");
 		} catch (NoSuchAlgorithmException e) {
 			throw new EncrypterException("Problem instantiation AES Cipher Algorithm", e);
 		} catch (NoSuchPaddingException e) {
 			throw new EncrypterException("Problem instantiation AES Cipher Padding", e);
+		} catch (NoSuchProviderException e) {
+			throw new EncrypterException("Problem instantiation AES Cipher Provider", e);
 		}
 
 		try {

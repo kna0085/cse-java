@@ -1,0 +1,77 @@
+buildscript {
+	repositories {
+		mavenCentral()
+		jcenter()
+	}
+	dependencies {
+		classpath("net.researchgate:gradle-release:2.0.0")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'maven'
+apply plugin: 'net.researchgate.release'
+
+group = 'com.transferwise'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.0'
+}
+
+repositories {
+	mavenCentral()
+	jcenter()
+}
+
+ext {
+	bouncycastleVersion = '1.52'
+}
+
+dependencies {
+
+	compile 'org.slf4j:slf4j-api:1.7.12'
+
+	// Need to use older one, for Java 7 compatibility or something..
+	//compile 'org.json:json:20141113'
+	compile 'org.json:json:20140107'
+
+	compile 'org.bouncycastle:bcprov-jdk15on:1.52'
+
+	// Tests
+	testCompile 'junit:junit:4.12'
+	testCompile 'org.slf4j:slf4j-simple:1.7.12'
+}
+
+release {
+	failOnUnversionedFiles = false
+	tagPrefix = project.name
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+	classifier 'sources'
+	from sourceSets.main.allSource
+}
+
+artifacts {
+	archives sourcesJar
+}
+
+createReleaseTag.dependsOn uploadArchives
+
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			snapshotRepository(url: snapshotUrl) {
+				authentication(userName: snapshotUserName, password: snapshotPassword)
+			}
+			repository(url: releaseUrl) {
+				authentication(userName: releaseUserName, password: releasePassword)
+			}
+		}
+	}
+}
