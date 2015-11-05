@@ -20,11 +20,13 @@ More info:
 
 The Gradle file supports releasing to an Artifactory repository.
 Just create a ~/.gradle/gradle.properties file with following properties:
+```
 snapshotUrl=
 snapshotUserName=
 snapshotPassword=
 releaseUrl=
 releaseUserName=
 releasePassword=
+```
 
 Use './gradlew release' to build and upload a new version.
