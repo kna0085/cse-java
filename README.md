@@ -1,10 +1,15 @@
-# Adyen CSE Java lib
+# CSE Java library
 
 [![Build Status](https://secure.travis-ci.org/transferwise/adyen-cse-java.svg?branch=master)](http://travis-ci.org/transferwise/adyen-cse-java)
 
-Java code for doing Adyen client-side encryption (CSE).
+Java code for doing client-side encryption (CSE).
 
-Adapted from the [Android cliend side encryption](https://github.com/Adyen/client-side-encryption) project. 
+Currently support Adyen CSE, which has been adapted from the [Android cliend side encryption](https://github.com/Adyen/client-side-encryption) project.
+
+
+## About CSE
+
+https://en.wikipedia.org/wiki/Client-side_encryption
 
 
 ## Issues
