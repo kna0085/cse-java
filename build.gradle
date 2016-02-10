@@ -41,6 +41,8 @@ dependencies {
 	compile 'org.json:json:20140107'
 
 	compile 'org.bouncycastle:bcprov-jdk15on:1.52'
+	compile 'com.google.code.gson:gson:2.5'
+	compile 'com.madgag.spongycastle:core:1.54.0.0'
 
 	// Tests
 	testCompile 'junit:junit:4.12'

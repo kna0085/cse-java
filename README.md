@@ -5,6 +5,7 @@
 Java code for doing client-side encryption (CSE).
 
 Currently support Adyen CSE, which has been adapted from the [Android cliend side encryption](https://github.com/Adyen/client-side-encryption) project.
+Also Worldpay CSE was supported, but not adopted yet from [Android client side encryption](https://github.com/Worldpay/worldpay-cse-lib-android)
 
 
 ## About CSE
