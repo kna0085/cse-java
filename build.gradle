@@ -41,6 +41,7 @@ dependencies {
 	compile 'org.json:json:20140107'
 
 	compile 'org.bouncycastle:bcprov-jdk15on:1.52'
+	compile 'com.worldpay:cse-android-sdk:1.0.2'
 
 	// Tests
 	testCompile 'junit:junit:4.12'
