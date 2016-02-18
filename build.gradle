@@ -20,7 +20,7 @@ targetCompatibility = 1.8
 
 
 task wrapper(type: Wrapper) {
-	gradleVersion = '2.0'
+	gradleVersion = '2.11'
 }
 
 repositories {
